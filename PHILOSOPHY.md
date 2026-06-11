@@ -1,29 +1,10 @@
-# The Philosophy of FastASCII
+# Philosophy of FastASCII
 
-> [!IMPORTANT]
-> **"Keine Kopien. Niemals. Kritischer JNI-Pfad. Native-First Performance."**
+## 1. Zero Allocations
+Java's standard library often forces you to instantiate `String` objects, triggering UTF-8 to UTF-16 conversions and filling up the young generation heap. FastASCII operates exclusively on primitives and pre-allocated `byte[]` arrays, eliminating GC pressure during hot loops.
 
-FastASCII is built on the principle that modern Java applications require **native-first** acceleration for performance-critical operations that the standard JVM APIs don't fully optimize.
+## 2. JIT over JNI for the Small Stuff
+Invoking JNI for small sequences (like reading a 10-byte ANSI mouse coordinate) introduces context-switching overhead that outweighs native speed. FastASCII defaults to Pure Java for maximum JIT inlining on small reads.
 
-## Core Tenets
-
-1.  **Native-First Execution**
-    Bypass standard Java layers to reach the physical limits of the hardware using hand-tuned C++ and SIMD intrinsics.
-
-2.  **Zero-Copy JNI Architecture**
-    Minimize JNI transition costs by using direct memory access patterns and avoiding implicit memory copies between the JVM and the native layer.
-
-3.  **Deterministic Latency**
-    Eliminate variance caused by JIT warm-up or garbage collection stalls in critical hot-paths.
-
-4.  **Hardware-Aware Optimization**
-    Leverage modern CPU features (AVX, SSE, NEON) to process data at hardware-native speeds.
-
-5.  **Blueprint Consistency**
-    As part of the **FastJava** ecosystem, FastASCII adheres to a standardized architecture:
-    *   **Native Backend**: Direct C++ implementation.
-    *   **Unified Loading**: Powered by `FastCore`.
-    *   **Premium Quality**: Built for high-performance systems and autonomous agents.
-
----
-**⚡ FastASCII — Powering the next generation of Native Java.**
+## 3. SIMD for the Big Stuff
+When reading megabytes of logs or parsing large JSON files, JIT isn't enough. FastASCII provides an optional native backend (`FastASCII.Native`) that uses vectorized instructions (AVX2, SSE4.2) to match C++ parse speeds.

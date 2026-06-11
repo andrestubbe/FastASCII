@@ -1,26 +1,17 @@
-# FastASCII Reference
+# FastASCII Reference Guide
 
-## 1. CPU Feature Model
-*   **AVX2** — detected via CPUID. Enables 32-byte vector ops.
-*   **SSE4.2** — detected via CPUID. 16-byte fallback.
-*   **Fallback rule**: AVX2 → SSE4.2 → scalar.
+## Writers (`FastASCIIWriter`)
+- `writeInt(byte[] buffer, int offset, int value)`: Writes an integer directly into a byte buffer.
+- `writeUtf8(byte[] buffer, int offset, int codePoint)`: Encodes a codepoint directly to UTF-8 bytes.
 
-## 2. Guarantees
-*   **Zero-Copy**: All operations use `GetPrimitiveArrayCritical` for direct memory access.
-*   **Unaligned Access**: Safe on all byte boundaries.
-*   **Thread-Safety**: All static native methods are thread-safe.
+## Readers (`FastASCIIReader`)
+- `parseUInt(byte[] buffer, int start, int end)`: Fast unsigned integer parsing.
+- `readUntil(byte[] buffer, int start, int end, byte target)`: Scans for a target byte.
 
-## 3. JNI & Memory Contracts
-*   **Direct Memory Pinning**: No implicit copies are made by the JNI bridge.
-*   **No Allocation**: All operations work on pre-allocated Java arrays or buffers.
-*   **Critical Sections**: Native calls minimize blocking to prevent GC impact.
+## Scanners (`FastASCIIScanner`)
+- `find(byte[] haystack, int offset, int length, byte needle)`: Zero-allocation `indexOf`.
+- `skipWhitespace(byte[] buffer, int offset, int limit)`: Advances the offset past ASCII whitespace.
 
-## 4. Platform Support
-| Platform | Status |
-|----------|--------|
-| Windows 10/11 (x64) | ✅ Fully Supported |
-
----
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
-
-Made with ⚡ by Andre Stubbe
+## UTF-8 (`FastUTF8`)
+- `decodeCodePoint(byte[] buffer, int offset, int length, int[] outCodePoint)`: Decodes one UTF-8 character.
+- `validate(byte[] buffer, int offset, int length)`: High-speed UTF-8 validation.
