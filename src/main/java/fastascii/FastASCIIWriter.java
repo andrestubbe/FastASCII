@@ -91,4 +91,12 @@ public final class FastASCIIWriter {
             return 4;
         }
     }
+
+    public static int writeAscii(byte[] buffer, int offset, String text) {
+        int len = text.length();
+        for (int i = 0; i < len; i++) {
+            buffer[offset + i] = (byte) text.charAt(i);
+        }
+        return len;
+    }
 }
