@@ -16,6 +16,12 @@ To achieve a completely responsive, zero-latency parsing and rendering experienc
 * 🚀 **[FastTerminal](https://github.com/andrestubbe/FastTerminal)** — Uses FastASCII to compose ANSI streams directly to memory for 60+ FPS zero-allocation rendering.
 * 🖱️ **[FastMouse](https://github.com/andrestubbe/FastMouse)** — Depends on FastASCII for ultra-fast integer tracking directly from standard input.
 
+[**Watch the Demo**](https://youtu.be/5IxTqipmnOE)
+
+---
+
+[![FastASCII Showcase](docs/screenshot.png)](https://youtu.be/5IxTqipmnOE)
+
 ---
 
 ```java
