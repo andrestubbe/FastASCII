@@ -4,9 +4,9 @@ import fastansi.FastANSI;
 import fastascii.FastGlyphDensity;
 import java.nio.charset.StandardCharsets;
 
-public class RaymarchDemo {
+public class Demo {
     
-    // Lightweight Hyper-Optimized Vector Math
+    // Vector Math
     static class Vec3 {
         final double x, y, z;
         Vec3(double x, double y, double z) { this.x = x; this.y = y; this.z = z; }
@@ -21,11 +21,11 @@ public class RaymarchDemo {
         }
     }
 
-    // Geometry Map (Signed Distance Field)
+    // Geometry Map
     static double map(Vec3 p) {
-        // Sphere floating at (0, 0, 5) with Radius 2.625 (1.5 * 1.75)
+        // Sphere definition
         double dSphere = p.sub(new Vec3(0, 0, 5)).length() - 2.625;
-        // Infinite flat Wall behind the sphere at Z = 10
+        // Wall definition
         double dWall = 10.0 - p.z;
         return Math.min(dSphere, dWall);
     }
@@ -54,8 +54,8 @@ public class RaymarchDemo {
     }
 
     public static void main(String[] args) throws Exception {
-        System.out.println("FastANSI 3D Raymarcher Demo");
-        System.out.println("Initializing Scene & GPU (CPU)...");
+        System.out.println("FastASCII 3D Raymarcher Demo");
+        System.out.println("Initializing Scene...");
 
         int width = 120;
         int height = 30;
@@ -68,7 +68,7 @@ public class RaymarchDemo {
             while (true) {
                 double time = (System.currentTimeMillis() - startTime) / 1000.0;
                 
-                // Orbiting Spotlight (Moves left-right and up-down smoothly)
+                // Light position
                 Vec3 lightPos = new Vec3(
                     Math.sin(time) * 5.0, 
                     4.0 + Math.cos(time * 0.7) * 2.0, 
@@ -76,7 +76,7 @@ public class RaymarchDemo {
                 );
 
                 StringBuilder sb = new StringBuilder();
-                sb.append("\033[?2026h"); // Start synchronized update
+                sb.append("\033[?2026h"); // Start frame update
                 sb.append("\033[H"); // Reset cursor to 0,0
 
                 for (int y = 0; y < height; y++) {
@@ -86,7 +86,7 @@ public class RaymarchDemo {
                         double nx = (double) x / width * 2.0 - 1.0;
                         double ny = (double) y / height * 2.0 - 1.0;
                         
-                        // Fix Terminal Aspect Ratio (Font is approx 2:1 height:width)
+                        // Adjust for terminal font aspect ratio
                         nx *= (double) width / height * 0.5;
                         ny = -ny; // Flip Y axis
                         
@@ -99,7 +99,7 @@ public class RaymarchDemo {
                             Vec3 hitPos = ro.add(rd.mul(dist));
                             Vec3 normal = calcNormal(hitPos);
                             
-                            // Determine which object we hit (Sphere vs Wall)
+                            // Determine hit object
                             double distToSphere = hitPos.sub(new Vec3(0, 0, 5)).length() - 2.625;
                             boolean hitWall = distToSphere > 0.1;
                             
@@ -107,24 +107,24 @@ public class RaymarchDemo {
                             Vec3 lightDir = lightPos.sub(hitPos).normalize();
                             double diffuse = Math.max(0.0, normal.dot(lightDir));
                             
-                            // Distance Attenuation (Light falls off as it gets further)
+                            // Distance attenuation
                             double lightDist = lightPos.sub(hitPos).length();
                             double attenuation = 1.0 / (1.0 + 0.02 * lightDist * lightDist);
-                            diffuse *= attenuation * 2.0; // Boost light intensity
+                            diffuse *= attenuation * 2.0; // Scale light intensity
 
-                            // Specular Highlight for the Sphere
+                            // Specular highlight
                             double specular = 0.0;
                             if (!hitWall) {
                                 Vec3 viewDir = ro.sub(hitPos).normalize();
                                 Vec3 reflectDir = lightDir.mul(-1).add(normal.mul(2.0 * normal.dot(lightDir))).normalize();
                                 double specAngle = Math.max(0.0, viewDir.dot(reflectDir));
-                                specular = Math.pow(specAngle, 16.0) * 0.8; // Shininess
+                                specular = Math.pow(specAngle, 16.0) * 0.8; // Specular exponent
                             }
                             
-                            // Cast Shadow Ray
+                            // Shadow computation
                             double shadowDist = rayMarch(hitPos.add(normal.mul(0.02)), lightDir, lightDist);
                             if (shadowDist > 0 && shadowDist < lightDist) {
-                                diffuse *= 0.05; // Hard Shadow (Pitch Black)
+                                diffuse *= 0.05; // Apply shadow
                                 specular = 0.0;
                             }
                             
@@ -133,17 +133,17 @@ public class RaymarchDemo {
                             if (finalLighting > 1.0) finalLighting = 1.0;
                             if (finalLighting < 0.0) finalLighting = 0.0;
                             
-                            // Get mathematically accurate glyph
+                            // Determine output glyph
                             char glyph;
                             if (finalLighting <= 0.02) glyph = ' '; // Force empty space for pure shadow
                             else glyph = FastGlyphDensity.getGlyphForOpacity((float) finalLighting);
                             
-                            // Assign constant base colors
+                            // Assign base colors
                             int r, g, b;
                             if (hitWall) {
-                                r = 128; g = 128; b = 128; // Half Gray Wall
+                                r = 128; g = 128; b = 128; // Gray wall
                             } else {
-                                r = 255; g = 255; b = 255; // White Sphere
+                                r = 255; g = 255; b = 255; // White sphere
                             }
                             
                             sb.append(FastANSI.fg(r, g, b)).append(glyph);
