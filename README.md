@@ -8,7 +8,7 @@
 
 **⚡ A high-performance, zero-allocation byte processing library for Java, engineered for direct manipulation of primitive byte arrays without the devastating overhead of String instantiation or UTF-16 transcoding.**
 
-FastASCII is the foundational byte-level standard library for the **FastJava** ecosystem. It introduces a dual-layer architecture—leveraging HotSpot JIT-optimized scalar operations for small buffers, and an optional native SIMD backend for extreme-throughput bulk parsing.
+FastASCII is the foundational byte-level standard library for the **FastJava** ecosystem.
 
 To achieve a completely responsive, zero-latency parsing and rendering experience, FastASCII is the invisible backbone designed to power the rest of the **FastJava** ecosystem:
 
@@ -47,10 +47,8 @@ public class Demo {
 
 - [Why FastASCII?](#why-fastascii)
 - [Key Features](#key-features)
-- [Architecture & Dual-Layer Setup](#architecture--dual-layer-setup)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
-- [Platform JNI Capabilities](#platform-jni-capabilities)
 - [License](#license)
 
 ---
@@ -65,26 +63,8 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 
 * **🚫 Zero Allocations** — Bypasses all `String`, `StringBuilder`, and `Matcher` instantiations.
 * **⚡ JIT-Optimized Java** — The core layer is pure Java, written specifically to trigger aggressive HotSpot compiler inlining for small buffers (like ANSI codes).
-* **🏎️ SIMD Native Backend** — For megabyte-sized logs or JSON files, seamlessly bridges to C++ SIMD (AVX2/SSE4.2) for extreme vector-accelerated throughput.
-* **🌐 Native UTF-8 Encoding** — Validates, encodes, and decodes UTF-8 codepoints natively at up to 4 GB/s using SIMD acceleration.
+* **🌐 Native UTF-8 Encoding** — Validates, encodes, and decodes UTF-8 codepoints natively at blazing speeds.
 * **🎯 Universal Parsers** — Built-in highly-optimized scalar search functions for `indexOf`, whitespace skipping, and integer parsing.
-
----
-
-## 📊 Architecture & Dual-Layer Setup
-
-FastASCII operates on two layers to ensure you never pay for JNI overhead when you don't need it.
-
-```text
-[ FastASCII Library ]
-  ├─ Pure Java Layer (Default)
-  │    └─ JIT-optimized scalar ops (Best for strings < 1KB)
-  │
-  └─ FastASCII.Native (Optional JNI)
-       └─ AVX2/SSE4.2 SIMD ops (Best for bulk parsing > 1KB)
-```
-
-The system will automatically utilize the pure Java layer for small terminal outputs, but can seamlessly fallback to the `Native` loader for gigabyte log parsing via **[FastCore](https://github.com/andrestubbe/FastCore)**.
 
 ---
 
@@ -122,12 +102,6 @@ Add the JitPack repository and the dependencies to your `pom.xml`:
         <version>0.1.0</version>
     </dependency>
 
-    <!-- FastCore (Optional Native Loader for SIMD) -->
-    <dependency>
-        <groupId>com.github.andrestubbe</groupId>
-        <artifactId>fastcore</artifactId>
-        <version>0.1.0</version>
-    </dependency>
 </dependencies>
 ```
 
@@ -140,7 +114,6 @@ repositories {
 
 dependencies {
     implementation 'com.github.andrestubbe:fastascii:0.1.0'
-    implementation 'com.github.andrestubbe:fastcore:0.1.0'
 }
 ```
 
@@ -149,7 +122,6 @@ dependencies {
 Download the latest JARs directly to add them to your classpath:
 
 1. 📦 **[fastascii-0.1.0.jar](https://github.com/andrestubbe/FastASCII/releases/download/0.1.0/fastascii-0.1.0.jar)** (The Core Library)
-2. ⚙️ **[fastcore-0.1.0.jar](https://github.com/andrestubbe/FastCore/releases/download/0.1.0/fastcore-0.1.0.jar)** (Optional Native Loader)
 
 ---
 
