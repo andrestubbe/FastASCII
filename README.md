@@ -131,16 +131,6 @@ Download the latest JARs directly to add them to your classpath:
 
 ---
 
-## Platform JNI Capabilities
-
-While fully functional in Pure Java, FastASCII is architected for native SIMD acceleration via `FastASCII.Native`:
-
-* **`validateUtf8`** — Validates massive text files at SIMD memory speeds.
-* **`findSubstring`** — Acts as a vectorized `memchr` and `strstr` for log scraping.
-* **`parseInt`** — SIMD integer parsing matching the raw speeds of `simdjson`.
-
----
-
 ## License
 
 MIT License — See [LICENSE](LICENSE) file for details.
