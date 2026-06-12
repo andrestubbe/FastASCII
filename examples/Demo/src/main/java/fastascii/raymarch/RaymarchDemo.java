@@ -93,7 +93,7 @@ public class RaymarchDemo {
                         Vec3 ro = new Vec3(0, 0, 0); // Camera at origin
                         Vec3 rd = new Vec3(nx, ny, 1.0).normalize(); // Ray direction
                         
-                        double dist = rayMarch(ro, rd, 20.0);
+                        double dist = rayMarch(ro, rd, 50.0);
                         
                         if (dist > 0) {
                             Vec3 hitPos = ro.add(rd.mul(dist));
