@@ -13,7 +13,7 @@ FastASCII is the foundational byte-level standard library for the **FastJava** e
 To achieve a completely responsive, zero-latency parsing and rendering experience, FastASCII is the invisible backbone designed to power the rest of the **FastJava** ecosystem:
 
 * ⚡ **[FastANSI](https://github.com/andrestubbe/FastANSI)** — Relies on FastASCII for byte-native escape sequence scanning.
-* 🚀 **[FastTerminal](https://github.com/andrestubbe/FastTerminal)** — Uses FastASCII to compose ANSI streams directly to memory for 60+ FPS zero-allocation rendering.
+* 🚀 **[FastTerminal](https://github.com/andrestubbe/FastTerminal)** — Uses FastASCII to compose ANSI streams directly to memory for 60+ FPS rendering.
 * 🖱️ **[FastMouse](https://github.com/andrestubbe/FastMouse)** — Depends on FastASCII for ultra-fast integer tracking directly from standard input.
 
 [**Watch the Demo**](https://youtu.be/5IxTqipmnOE)
