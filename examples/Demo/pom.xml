@@ -23,7 +23,7 @@
         <dependency>
             <groupId>com.github.andrestubbe</groupId>
             <artifactId>FastANSI</artifactId>
-            <version>0.1.0</version>
+            <version>main-SNAPSHOT</version>
         </dependency>
     </dependencies>
     
