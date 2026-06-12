@@ -1,4 +1,4 @@
-﻿package fastascii.raymarch;
+package fastascii.raymarch;
 
 import fastansi.FastANSI;
 import fastascii.FastGlyphDensity;
