@@ -45,7 +45,7 @@ public class Demo {
 
 ## Table of Contents
 
-- [Mission](#mission)
+- [Why FastASCII?](#why-fastascii)
 - [Key Features](#key-features)
 - [Architecture & Dual-Layer Setup](#architecture--dual-layer-setup)
 - [API Quick Reference](#api-quick-reference)
@@ -55,7 +55,7 @@ public class Demo {
 
 ---
 
-## 🎯 Mission
+## Why FastASCII?
 
 The mission is to build the fastest, most robust byte manipulation kernel on the JVM. Java's standard library forces expensive `String` allocations and UTF-8 to UTF-16 conversions that destroy performance in hot loops. FastASCII operates exclusively on primitives, empowering developers to create parsers and renderers that rival `ripgrep` and `simdjson` in speed.
 
