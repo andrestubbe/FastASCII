@@ -148,4 +148,4 @@ MIT License — See [LICENSE](LICENSE) file for details.
 - [FastCore](https://github.com/andrestubbe/FastCore)
 
 ---
-**Part of the FastJava Ecosystem** — *Making the JVM faster.*
+**Part of the FastJava Ecosystem** — *Making the JVM faster. Small package. Maximum speed. Zero bloat. 🚀💎*
