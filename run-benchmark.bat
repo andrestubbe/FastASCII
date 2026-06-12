@@ -1,15 +1,18 @@
 @echo off
 chcp 65001 >nul
+cls
 
-    echo.
-    echo ❌ Maven build failed.
-    pause
-    exit /b %ERRORLEVEL%
-)
+echo ⚡ Building Main Project...
+call mvn clean install -DskipTests -q
+if %ERRORLEVEL% NEQ 0 ( echo ❌ Build failed. & pause & exit /b %ERRORLEVEL% )
 
-echo.
-echo Running Benchmark...
+echo 🛠 Compiling Benchmark...
 cd examples\Benchmark
-call mvn compile exec:java
+call mvn compile -q
+if %ERRORLEVEL% NEQ 0 ( echo ❌ Compile failed. & cd ..\.. & pause & exit /b %ERRORLEVEL% )
+
+echo 🚀 Running Benchmark...
+call mvn exec:java -q
+
 cd ..\..
 pause

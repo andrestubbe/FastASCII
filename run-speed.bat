@@ -6,10 +6,13 @@ echo ⚡ Building Main Project...
 call mvn clean install -DskipTests -q
 if %ERRORLEVEL% NEQ 0 ( echo ❌ Build failed. & pause & exit /b %ERRORLEVEL% )
 
-cd examples\Demo
-echo 🛠 Compiling Demo...
+cd examples\Speed
+echo 🛠 Compiling Speed Demo...
 call mvn clean compile -q
 if %ERRORLEVEL% NEQ 0 ( echo ❌ Compile failed. & pause & exit /b %ERRORLEVEL% )
 
-echo 🚀 Running Demo...
-call mvn exec:java -q
+echo 🚀 Running Speed Demo...
+call mvn exec:java -q"-Dexec.mainClass=fastascii.Demo" -q
+
+cd ..\..
+pause

@@ -1,15 +1,15 @@
-package fastXXX;
+package fastascii;
 
-import fastXXX.FastXXX;
+import fastascii.FastASCIIWriter;
 
 /**
- * Performance Benchmark comparing FastXXX to standard Java alternatives.
+ * Performance Benchmark comparing FastASCIIWriter to standard Java alternatives.
  */
 public class Benchmark {
     public static void main(String[] args) {
-        System.out.println("=== FastXXX Benchmark ===");
+        System.out.println("=== FastASCIIWriter Benchmark ===");
         
-        FastXXX api = new FastXXX();
+        FastASCIIWriter api = null;
         
         int iterations = 10000;
         
@@ -21,7 +21,7 @@ public class Benchmark {
         }
         long javaTimeMs = (System.nanoTime() - startJava) / 1_000_000;
         
-        // 2. Benchmark FastXXX Native
+        // 2. Benchmark FastASCIIWriter Native
         long startNative = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             // api.doSomethingNative();
@@ -31,7 +31,7 @@ public class Benchmark {
         
         System.out.println("Iterations: " + iterations);
         System.out.println("Standard Java: " + javaTimeMs + " ms");
-        System.out.println("FastXXX Native: " + nativeTimeMs + " ms");
+        System.out.println("FastASCIIWriter Native: " + nativeTimeMs + " ms");
         
         if (nativeTimeMs > 0) {
             System.out.println("Speedup: " + (javaTimeMs / (float) nativeTimeMs) + "x");
