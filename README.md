@@ -1,4 +1,4 @@
-# FastASCII 0.1.0 [ALPHA] — Zero-Allocation ASCII and UTF-8 Byte Engine for Java
+# FastASCII 0.1.0 [ALPHA-2026-06] — Zero-Allocation ASCII and UTF-8 Byte Engine for Java
 
 [![Status](https://img.shields.io/badge/status-0.1.0-brightgreen.svg)](https://github.com/andrestubbe/FastASCII/releases/tag/0.1.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
