@@ -21,8 +21,8 @@ if errorlevel 1 (
     exit /b %errorlevel%
 )
 
-echo 🚀 Running Demo (fastascii.raymarch.Demo)...
-call mvn -q org.codehaus.mojo:exec-maven-plugin:3.1.0:java -Dexec.mainClass=fastascii.raymarch.Demo
+echo 🚀 Running Braille Demo (BrailleRaymarchDemo)...
+call mvn -q org.codehaus.mojo:exec-maven-plugin:3.1.0:java -Dexec.mainClass=fastascii.raymarch.BrailleRaymarchDemo
 set EXITCODE=%ERRORLEVEL%
 popd
 exit /b %EXITCODE%
