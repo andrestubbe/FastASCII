@@ -5,7 +5,8 @@ package fastascii;
  */
 public final class FastASCIIReader {
 
-    private FastASCIIReader() {}
+    private FastASCIIReader() {
+    }
 
     /**
      * Parses an unsigned integer from the byte buffer.

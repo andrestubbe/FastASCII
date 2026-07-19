@@ -5,7 +5,8 @@ package fastascii;
  */
 public final class FastASCIIScanner {
 
-    private FastASCIIScanner() {}
+    private FastASCIIScanner() {
+    }
 
     public static int find(byte[] haystack, int offset, int length, byte needle) {
         if (FastASCII.Native.isAvailable() && length >= 1024) {

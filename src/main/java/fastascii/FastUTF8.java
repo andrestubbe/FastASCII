@@ -5,10 +5,12 @@ package fastascii;
  */
 public final class FastUTF8 {
 
-    private FastUTF8() {}
+    private FastUTF8() {
+    }
 
     /**
      * Decodes a UTF-8 code point from the buffer.
+     *
      * @param outCodePoint A single-element array to receive the decoded code point.
      * @return The number of bytes consumed (1-4), or -1 if invalid.
      */
