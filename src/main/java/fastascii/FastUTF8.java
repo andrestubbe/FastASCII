@@ -15,11 +15,6 @@ public final class FastUTF8 {
      * @return The number of bytes consumed (1-4), or -1 if invalid.
      */
     public static int decodeCodePoint(byte[] buffer, int offset, int length, int[] outCodePoint) {
-        if (FastASCII.Native.isAvailable() && length >= 1024) { // Only use JNI for bulk, for single char it's too slow
-            // Normally JNI would decode a whole string, but for API completeness:
-            // FastASCII.Native.decodeUtf8(buffer, offset, length, outCodePoint);
-        }
-
         if (length <= 0) return -1;
         int b1 = buffer[offset] & 0xFF;
 
@@ -63,10 +58,6 @@ public final class FastUTF8 {
     }
 
     public static boolean validate(byte[] buffer, int offset, int length) {
-        if (FastASCII.Native.isAvailable() && length >= 1024) {
-            return FastASCII.Native.validateUtf8(buffer, offset, length) == 1;
-        }
-
         int end = offset + length;
         int i = offset;
         int[] cp = new int[1];

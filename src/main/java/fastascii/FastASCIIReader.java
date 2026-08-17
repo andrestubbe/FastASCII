@@ -10,13 +10,8 @@ public final class FastASCIIReader {
 
     /**
      * Parses an unsigned integer from the byte buffer.
-     * Optionally falls back to FastASCII.Native if available and length is large.
      */
     public static int parseUInt(byte[] buffer, int start, int end) {
-        if (FastASCII.Native.isAvailable() && (end - start) >= 1024) {
-            return FastASCII.Native.parseInt(buffer, start, end - start);
-        }
-
         int result = 0;
         for (int i = start; i < end; i++) {
             byte b = buffer[i];

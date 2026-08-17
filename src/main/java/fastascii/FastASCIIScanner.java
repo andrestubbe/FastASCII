@@ -9,10 +9,6 @@ public final class FastASCIIScanner {
     }
 
     public static int find(byte[] haystack, int offset, int length, byte needle) {
-        if (FastASCII.Native.isAvailable() && length >= 1024) {
-            return FastASCII.Native.findByte(haystack, offset, length, needle);
-        }
-
         int end = offset + length;
         for (int i = offset; i < end; i++) {
             if (haystack[i] == needle) return i;
@@ -21,10 +17,6 @@ public final class FastASCIIScanner {
     }
 
     public static int find(byte[] haystack, int offset, int length, byte[] needle) {
-        if (FastASCII.Native.isAvailable() && length >= 1024) {
-            return FastASCII.Native.findSubstring(haystack, offset, length, needle);
-        }
-
         if (needle.length == 0) return offset;
         if (needle.length > length) return -1;
 
