@@ -104,15 +104,15 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 `FastASCII` is built for high-throughput byte processing and zero-allocation parsing. In the official [JMH Benchmark](examples/Benchmark), the system measured throughput across various byte operations:
 
 ```text
-Benchmark                                            Mode  Cnt           Score            Error  Units
-ASCIIBenchmark.benchmarkFastASCIIWriteUtf8          thrpt    3  1969308910,268 ± 2563663636,053  ops/s
-ASCIIBenchmark.benchmarkJavaStringGetBytes          thrpt    3    42257743,812 ±  196393567,708  ops/s
-ASCIIBenchmark.benchmarkFastASCIIWriteInt           thrpt    3    73711394,231 ±   53995529,398  ops/s
-ASCIIBenchmark.benchmarkJavaIntToString             thrpt    3    45162532,447 ±  212680799,075  ops/s
-ASCIIBenchmark.benchmarkFastASCIIParseUInt          thrpt    3    78883788,685 ±  214179469,644  ops/s
-ASCIIBenchmark.benchmarkJavaIntegerParseInt         thrpt    3    60248220,270 ±   30679786,197  ops/s
-ASCIIBenchmark.benchmarkFastASCIIFindByte           thrpt    3   170030593,977 ±  805067393,217  ops/s
-ASCIIBenchmark.benchmarkJavaStringIndexOf           thrpt    3   313027503,055 ±  802829538,875  ops/s
+Benchmark                            Mode  Cnt           Score            Error  Units
+WriteUtf8                             thrpt    3  1969308910,268 ± 2563663636,053  ops/s
+StringGetBytes                       thrpt    3    42257743,812 ±  196393567,708  ops/s
+WriteInt                              thrpt    3    73711394,231 ±   53995529,398  ops/s
+IntToString                          thrpt    3    45162532,447 ±  212680799,075  ops/s
+ParseUInt                             thrpt    3    78883788,685 ±  214179469,644  ops/s
+IntegerParseInt                       thrpt    3    60248220,270 ±   30679786,197  ops/s
+FindByte                              thrpt    3   170030593,977 ±  805067393,217  ops/s
+StringIndexOf                         thrpt    3   313027503,055 ±  802829538,875  ops/s
 ```
 
 > **46x Faster UTF-8 Encoding**: `FastASCII.writeUtf8()` achieves **1.97 billion operations per second**, 46x faster than Java's `String.getBytes()`. The library excels at byte writing and integer parsing, making it ideal for terminal rendering and data streaming applications.
