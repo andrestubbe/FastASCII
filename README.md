@@ -65,6 +65,7 @@ public class ByteProcessingDemo {
 
 - [Why FastASCII?](#why-fastascii)
 - [Key Features](#key-features)
+- [Real-World Use Cases](#real-world-use-cases)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
 - [License](#license)
@@ -83,6 +84,17 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 * **⚡ JIT-Optimized Java** — The core layer is pure Java, written specifically to trigger aggressive HotSpot compiler inlining for small buffers (like ANSI codes).
 * **🌐 Native UTF-8 Encoding** — Validates, encodes, and decodes UTF-8 codepoints natively at blazing speeds.
 * **🎯 Universal Parsers** — Built-in highly-optimized scalar search functions for `indexOf`, whitespace skipping, and integer parsing.
+
+---
+
+## Real-World Use Cases
+
+- 🖥️ **Terminal Rendering**: Power 60+ FPS zero-latency ANSI rendering in [FastTerminal](https://github.com/andrestubbe/FastTerminal) and [CreamCLI](https://github.com/andrestubbe/Cream-CLI) without JVM Garbage Collection stalls.
+- 📡 **Network Protocol Parsing**: Parse TCP/IP packets, HTTP headers, and WebSocket frames directly from raw byte buffers without String conversion overhead.
+- 🎮 **Input Processing**: Process terminal mouse coordinates and keyboard events in [FastMouse](https://github.com/andrestubbe/FastMouse) for instant integer parsing from standard input.
+- 🔍 **Log Analysis**: Scan multi-gigabyte server logs for threat patterns and critical alerts at memory bus speeds without heap allocation.
+- 📊 **Data Streaming**: Process real-time data streams from sensors, databases, or file systems with zero-copy byte operations.
+- 📄 **File Processing**: Read and process large text files, configuration files, and data dumps without the overhead of String instantiation.
 
 ---
 
