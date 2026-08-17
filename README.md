@@ -66,6 +66,7 @@ public class ByteProcessingDemo {
 - [Why FastASCII?](#why-fastascii)
 - [Key Features](#key-features)
 - [Real-World Use Cases](#real-world-use-cases)
+- [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
 - [Installation](#installation)
 - [License](#license)
@@ -98,6 +99,19 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 
 ---
 
+## Performance Benchmarks
+
+`FastASCII` is built for high-throughput byte processing and zero-allocation parsing. Run the official [JMH Benchmark](examples/Benchmark) to measure performance:
+
+```cmd
+cd examples/Benchmark
+run-benchmark.bat
+```
+
+The benchmark compares FastASCII operations against standard Java String operations across various byte processing scenarios including integer parsing, byte searching, UTF-8 encoding/decoding, and large buffer operations.
+
+---
+
 ## API Quick Reference
 
 | Method                                | Description                                              | Component |
@@ -107,6 +121,14 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 | `parseUInt(buffer, start, end)`       | Blazing fast unsigned integer parsing from bytes.        | `FastASCIIReader` |
 | `find(haystack, offset, len, needle)` | Zero-allocation `indexOf` replacement.                   | `FastASCIIScanner` |
 | `decodeCodePoint(buf, off, len, out)` | High-throughput UTF-8 to UTF-32 decoding.                | `FastUTF8` |
+
+---
+
+## Documentation
+
+- **[JMH Benchmark](examples/Benchmark)** — Official performance benchmarks comparing FastASCII with standard Java operations.
+- **[PHILOSOPHY.md](docs/PHILOSOPHY.md)** — Engineering rationale for zero-allocation byte processing.
+- **[ROADMAP.md](docs/ROADMAP.md)** — Future milestones and ecosystem adoption plans.
 
 ---
 
