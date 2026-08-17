@@ -24,25 +24,37 @@ To achieve a completely responsive, zero-latency parsing and rendering experienc
 
 ---
 
-```java
-// Quick Start — Example
+## Quick Start — Example
 
+```java
 import fastascii.FastASCIIWriter;
 import fastascii.FastASCIIReader;
+import fastascii.FastASCIIScanner;
+import fastascii.FastUTF8;
 
-public class Demo {
-    public static void main(String[] args) {
-        byte[] buffer = new byte[1024];
-        
-        // Write integers directly to bytes (Zero Allocation!)
-        int bytesWritten = FastASCIIWriter.writeInt(buffer, 0, 404);
-        
-        // Write UTF-8 codepoints natively
-        bytesWritten += FastASCIIWriter.writeUtf8(buffer, bytesWritten, 0x1F680); // 🚀
+public class ByteProcessingDemo {
+    public static void processAnsiSequence(byte[] buffer, int offset, int length) {
+        // 1. Write ANSI escape sequence directly to bytes (Zero Allocation!)
+        int bytesWritten = FastASCIIWriter.writeAscii(buffer, offset, '\u001B');
+        bytesWritten += FastASCIIWriter.writeAscii(buffer, offset + bytesWritten, '[');
+        bytesWritten += FastASCIIWriter.writeInt(buffer, offset + bytesWritten, 31);
+        bytesWritten += FastASCIIWriter.writeAscii(buffer, offset + bytesWritten, 'm');
 
-        // Parse unsigned integers blazingly fast
-        int parsed = FastASCIIReader.parseUInt(buffer, 0, 3);
+        // 2. Write UTF-8 codepoints natively
+        bytesWritten += FastASCIIWriter.writeUtf8(buffer, offset + bytesWritten, 0x1F680); // 🚀
+
+        // 3. Parse unsigned integers blazingly fast
+        int parsed = FastASCIIReader.parseUInt(buffer, offset, bytesWritten);
         System.out.println("Parsed: " + parsed);
+
+        // 4. Find bytes efficiently
+        int targetIndex = FastASCIIScanner.find(buffer, offset, length, (byte) '[');
+        System.out.println("Found '[' at index: " + targetIndex);
+
+        // 5. Validate UTF-8 sequence
+        int[] codePoint = new int[1];
+        int consumed = FastUTF8.decodeCodePoint(buffer, offset, length, codePoint);
+        System.out.println("Decoded codepoint: " + codePoint[0] + " (consumed " + consumed + " bytes)");
     }
 }
 ```
