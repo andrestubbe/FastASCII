@@ -5,7 +5,8 @@ package fastascii;
  */
 public final class FastASCIIChar {
 
-    private FastASCIIChar() {}
+    private FastASCIIChar() {
+    }
 
     public static boolean isDigit(byte b) {
         return b >= '0' && b <= '9';

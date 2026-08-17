@@ -20,17 +20,16 @@ jobs:
         cache: maven
     
     - name: Build native DLL
-      run: .\compile.bat
+      run: echo. | .\compile.bat
     
     - name: Build JAR
-      run: mvn -B package -DskipTests
+      run: mvn -B package -DskipTests -Dmaven.javadoc.skip=true
     
     - name: Upload Release Assets
       uses: softprops/action-gh-release@v2
       with:
         files: |
           target/*.jar
-          build/*.dll
         name: Release ${{ github.ref_name }}
         draft: false
         prerelease: false
