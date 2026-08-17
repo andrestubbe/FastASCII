@@ -117,17 +117,6 @@ ASCIIBenchmark.benchmarkJavaStringIndexOf           thrpt    3   313027503,055 Â
 
 > **46x Faster UTF-8 Encoding**: `FastASCII.writeUtf8()` achieves **1.97 billion operations per second**, 46x faster than Java's `String.getBytes()`. The library excels at byte writing and integer parsing, making it ideal for terminal rendering and data streaming applications.
 
-Run the benchmark locally:
-
-```cmd
-# Option 1: Run from root (builds project + benchmark)
-run-benchmark.bat
-
-# Option 2: Run from benchmark directory
-cd examples/Benchmark
-run-benchmark.bat
-```
-
 ---
 
 ## API Quick Reference
