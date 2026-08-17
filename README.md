@@ -90,7 +90,7 @@ The mission is to build the fastest, most robust byte manipulation kernel on the
 
 ## Real-World Use Cases
 
-- 🖥️ **Terminal Rendering**: Power 60+ FPS zero-latency ANSI rendering in [FastTerminal](https://github.com/andrestubbe/FastTerminal) and [CreamCLI](https://github.com/andrestubbe/Cream-CLI) without JVM Garbage Collection stalls.
+- 🖥️ **Terminal Rendering**: Power 60+ FPS zero-latency ANSI rendering in [FastTerminal](https://github.com/andrestubbe/FastTerminal) without JVM Garbage Collection stalls.
 - 📡 **Network Protocol Parsing**: Parse TCP/IP packets, HTTP headers, and WebSocket frames directly from raw byte buffers without String conversion overhead.
 - 🎮 **Input Processing**: Process terminal mouse coordinates and keyboard events in [FastMouse](https://github.com/andrestubbe/FastMouse) for instant integer parsing from standard input.
 - 🔍 **Log Analysis**: Scan multi-gigabyte server logs for threat patterns and critical alerts at memory bus speeds without heap allocation.
@@ -181,6 +181,17 @@ dependencies {
 Download the latest JARs directly to add them to your classpath:
 
 1. 📦 **[fastascii-0.1.0.jar](https://github.com/andrestubbe/FastASCII/releases/download/0.1.0/fastascii-0.1.0.jar)** (The Core Library)
+
+---
+
+## Platform Support
+
+| Platform      | Status |
+|---------------|--------|
+| Windows 10/11 | 🚀 Fully Supported |
+| Linux         | 🚀 Fully Supported |
+| macOS         | 🚀 Fully Supported |
+
 
 ---
 
