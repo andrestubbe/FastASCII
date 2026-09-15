@@ -1,10 +1,18 @@
 package fastascii.benchmark;
 
 import fastascii.FastASCIIReader;
-import fastascii.FastASCIIWriter;
 import fastascii.FastASCIIScanner;
+import fastascii.FastASCIIWriter;
 import fastascii.FastUTF8;
-import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Warmup;
 
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Fork(1)
-public class ASCIIBenchmark {
+public class Benchmark {
 
     private byte[] smallBuffer;
     private byte[] largeBuffer;
@@ -56,64 +64,64 @@ public class ASCIIBenchmark {
         ansiString = new String(ansiBuffer, StandardCharsets.UTF_8);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIWriteInt() {
         byte[] buffer = new byte[16];
         return FastASCIIWriter.writeInt(buffer, 0, 12345);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaIntToString() {
         return Integer.toString(12345).getBytes(StandardCharsets.UTF_8).length;
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIParseUInt() {
         return FastASCIIReader.parseUInt(integerBuffer, 0, integerBuffer.length);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaIntegerParseInt() {
         return Integer.parseInt(integerString);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIFindByte() {
         return FastASCIIScanner.find(smallBuffer, 0, smallBuffer.length, (byte) 'F');
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaStringIndexOf() {
         return smallString.indexOf('F');
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIFindSubstring() {
         return FastASCIIScanner.find(smallBuffer, 0, smallBuffer.length, "Fast".getBytes(StandardCharsets.UTF_8));
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaStringIndexOfSubstring() {
         return smallString.indexOf("Fast");
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIWriteUtf8() {
         byte[] buffer = new byte[16];
         return FastASCIIWriter.writeUtf8(buffer, 0, 0x1F680); // 🚀
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaStringGetBytes() {
         return "🚀".getBytes(StandardCharsets.UTF_8).length;
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public boolean benchmarkFastASCIIValidateUtf8() {
         return FastUTF8.validate(largeBuffer, 0, largeBuffer.length);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public boolean benchmarkJavaUtf8Validation() {
         try {
             new String(largeBuffer, StandardCharsets.UTF_8);
@@ -123,23 +131,23 @@ public class ASCIIBenchmark {
         }
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIIDecodeCodePoint() {
         int[] codePoint = new int[1];
         return FastUTF8.decodeCodePoint(ansiBuffer, 0, ansiBuffer.length, codePoint);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaStringCodePointAt() {
         return ansiString.codePointAt(0);
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkFastASCIILargeBufferSearch() {
         return FastASCIIScanner.find(largeBuffer, 0, largeBuffer.length, (byte) 'E');
     }
 
-    @Benchmark
+    @org.openjdk.jmh.annotations.Benchmark
     public int benchmarkJavaLargeBufferSearch() {
         return largeString.indexOf('E');
     }
