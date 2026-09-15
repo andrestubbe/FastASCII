@@ -69,7 +69,6 @@ public class ByteProcessingDemo {
 - [Real-World Use Cases](#real-world-use-cases)
 - [Performance Benchmarks](#performance-benchmarks)
 - [API Quick Reference](#api-quick-reference)
-- [FastJava Native Memory Substrate](#fastjava-native-memory--hardware-substrate)
 - [Technical Demos & Benchmarks](#technical-demos--benchmarks)
 - [Installation](#installation)
 - [Documentation](#documentation)
@@ -135,20 +134,6 @@ StringIndexOf                         thrpt    3   313027503.055 ±  802829538.8
 | `FastASCIIScanner.find(haystack, off, len, needle)` | `int` | Zero-allocation `indexOf` byte replacement. | [Reference](docs/REFERENCE.md#class-fastasciifastasciiscanner) |
 | `FastUTF8.decodeCodePoint(buf, off, len, out)` | `int` | High-throughput UTF-8 to UTF-32 decoding. | [Reference](docs/REFERENCE.md#class-fastasciifastutf8) |
 | `FastUTF8.validate(buf, off, len)` | `boolean` | Fast validation of raw UTF-8 byte sequences. | [Reference](docs/REFERENCE.md#class-fastasciifastutf8) |
-
----
-
-## FastJava Native Memory & Hardware Substrate
-
-`FastASCII` is part of the core **FastJava Low-Level Native Memory Substrate**, designed to grant Java applications raw C++ speed and direct hardware access:
-
-| Substrate Module | Role & Key Capability |
-|---|---|
-| **[`FastBytes`](https://github.com/andrestubbe/FastBytes)** | Vectorized SIMD Byte Engine — Hand-tuned AVX2 / AVX-512 byte searching (`indexOf`), XOR diffing, and zero-allocation array sweeps. |
-| **[`FastSIMD`](https://github.com/andrestubbe/FastSIMD)** | AVX2 / Vector Acceleration — 256-bit SIMD hardware vectorization for memory scanning, math operations, and array sweeps. |
-| **[`FastPointer`](https://github.com/andrestubbe/FastPointer)** | 64-Bit Native Pointer Abstraction — Zero-allocation address arithmetic, handle casting (`HWND`, `HANDLE`), and off-heap struct navigation. |
-| **[`FastMemory`](https://github.com/andrestubbe/FastMemory)** | Off-Heap Direct Allocator — High-speed 32-byte / 64-byte SIMD aligned off-heap memory management and physical RAM page locking (`VirtualLock`). |
-| **[`FastSharedMemory`](https://github.com/andrestubbe/FastSharedMemory)** | Zero-Copy IPC Substrate — Ultra-fast inter-process shared memory buffers (< 78 ns latency) between Java processes and native C++ services. |
 
 ---
 
