@@ -82,6 +82,17 @@ public class ByteProcessingDemo {
 
 The mission is to build the fastest, most robust byte manipulation kernel on the JVM. Java's standard library forces expensive `String` allocations and UTF-8 to UTF-16 conversions that destroy performance in hot loops. FastASCII operates exclusively on primitives, empowering developers to create parsers and renderers that redefine Java performance by pushing the absolute limits of the HotSpot JIT compiler.
 
+- **Eliminate UTF-16 Transcoding Overhead**: Standard `java.lang.String` forces byte streams through UTF-16 decoding, doubling memory footprint and wasting CPU cycles in I/O loops.
+- **Zero-Allocation JIT Hot Paths**: Bypasses `StringBuilder`, `Scanner`, and `Integer.parseInt(String)` object allocations, keeping JVM young generation GC pressure at exactly zero.
+- **Direct Primitive Byte Manipulation**: Scalar and SIMD-aligned search primitives operate directly on raw `byte[]` buffers and native memory slices without intermediate copies.
+
+| Feature | Standard Java (java.lang.String) | Apache Commons Lang | FastASCII |
+|:---|:---|:---|:---|
+| **Heap Allocation** | High (String / char[] garbage) | High (intermediate objects) | **Zero GC** (in-place `byte[]`) |
+| **Transcoding Cost** | UTF-8 ↔ UTF-16 conversion penalty | UTF-16 String overhead | **Direct UTF-8 / ASCII bytes** |
+| **Integer Parsing** | `Integer.parseInt` needs String | String parsing helpers | **`FastASCIIReader.parseUInt`** (raw bytes) |
+| **JIT Optimization** | Complex branch / charset loops | Generic reflection / wrappers | **Aggressive inline intrinsics** |
+
 ---
 
 ## Key Features
